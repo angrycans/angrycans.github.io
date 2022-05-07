@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 13 Dec 2019 21:00:00 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 15:37:56 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NodeMCU_setting</title>
+      <link>https://angrycans.github.io/post/nodeMCU_setting/</link>
+      <pubDate>Sat, 07 May 2022 15:37:56 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/nodeMCU_setting/</guid>
+      <description>hello</description>
+    </item>
+    
     <item>
       <title>Golang Gin 实战（三）| 路由参数</title>
       <link>https://angrycans.github.io/post/2019-12-13-golang-gin-parameters-in-path/</link>
