@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 07 May 2022 15:37:56 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/tags/IOT/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>NodeMCU_setting</title>
+      <title>(MAC)NodeMCU环境搭建 (1)</title>
       <link>https://angrycans.github.io/post/nodeMCU_setting/</link>
       <pubDate>Sat, 07 May 2022 15:37:56 +0800</pubDate>
       
       <guid>https://angrycans.github.io/post/nodeMCU_setting/</guid>
-      <description>hello</description>
+      <description>1. arduino install https://www.arduino.cc/en/software 2. ESP8266 install config http://arduino.esp8266.com/stable/package_esp8266com_index.json install esp8266 开发板 3. Test usb 连接好nodemcu 设置端口 选择blink</description>
     </item>
     
   </channel>
