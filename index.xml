@@ -6,7 +6,16 @@
     <description>Recent content on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 07 May 2022 15:37:56 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 May 2022 16:11:35 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NodeMCU FirmwareBurn (2)</title>
+      <link>https://angrycans.github.io/post/nodeMCU_FirmwareBurn/</link>
+      <pubDate>Mon, 09 May 2022 16:11:35 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/nodeMCU_FirmwareBurn/</guid>
+      <description>固件烧录 固件下载地址 https://nodemcu-build.com/ 烧录工具 https://github.com/marcelstoer/nodemcu-pyflasher 选择需要的模块编译 几分钟后邮箱会收到bin文件,进行烧录 ESPlorer 下载安装 https://github.com/4refr0nt/ESPlorer/releases Test led = 4 gpio.mode(led,gpio.OUTPUT,gpio.PULLUP) gpio.write(led,gpio.LOW)</description>
+    </item>
+    
     <item>
       <title>NodeMCU环境搭建 MAC(1)</title>
       <link>https://angrycans.github.io/post/nodeMCU_setting/</link>
