@@ -13,7 +13,7 @@
       <pubDate>Tue, 10 May 2022 14:27:23 +0800</pubDate>
       
       <guid>https://angrycans.github.io/post/nodemcu_httpserver1/</guid>
-      <description>使用lua 来搭建httpserver</description>
+      <description>使用lua 来搭建httpserver nodemcu的官方mod库 https://github.com/nodemcu/nodemcu-firmware/tree/release/lua_modules</description>
     </item>
     
     <item>
