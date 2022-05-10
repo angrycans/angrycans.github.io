@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>(2) NodeMCU FirmwareBurn | 我的杂货铺</title>
-    <meta property="og:title" content="(2) NodeMCU FirmwareBurn - 我的杂货铺">
+    <title>(3) 搭建httpserver  | 我的杂货铺</title>
+    <meta property="og:title" content="(3) 搭建httpserver  - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-09T16:11:35&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-10T14:27:23&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-09T16:11:35&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-10T14:27:23&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="(2) NodeMCU FirmwareBurn">
+    <meta name="description" content="(3) 搭建httpserver ">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/">
+    <meta property="og:url" content="https://angrycans.github.io/post/nodemcu_httpserver1/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -140,7 +140,7 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#固件烧录">固件烧录</a></li>
+        <li><a href="#使用lua-来搭建httpserver">使用lua 来搭建httpserver</a></li>
       </ul>
     </li>
   </ul>
@@ -180,10 +180,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">(2) NodeMCU FirmwareBurn</h1>
+            <h1 class="post-title">(3) 搭建httpserver </h1>
         </header>
         <date class="post-meta meta-date">
-            2022年5月9日
+            2022年5月10日
         </date>
         
         <div class="post-meta">
@@ -207,56 +207,7 @@
         </div>
         
         <div class="post-content">
-            <h3 id="固件烧录">固件烧录</h3>
-<ol>
-<li>
-<p>固件下载地址
-<a href="https://nodemcu-build.com/">https://nodemcu-build.com/</a></p>
-</li>
-<li>
-<p>烧录工具
-<a href="https://github.com/marcelstoer/nodemcu-pyflasher">https://github.com/marcelstoer/nodemcu-pyflasher</a></p>
-</li>
-<li>
-<p>选择需要的模块编译
-
-        <a data-fancybox="gallery" href="2022-05-09-16-30-45.png">
-            <img class="mx-auto" alt="" src="2022-05-09-16-30-45.png" />
-        </a>
-    </p>
-</li>
-</ol>
-<p>几分钟后邮箱会收到bin文件,进行烧录
-
-        <a data-fancybox="gallery" href="2022-05-09-16-33-50.png">
-            <img class="mx-auto" alt="" src="2022-05-09-16-33-50.png" />
-        </a>
-    </p>
-<ol start="4">
-<li>ESPlorer 下载安装
-<a href="https://github.com/4refr0nt/ESPlorer/releases">https://github.com/4refr0nt/ESPlorer/releases</a></li>
-</ol>
-<p>
-        <a data-fancybox="gallery" href="2022-05-10-11-27-23.png">
-            <img class="mx-auto" alt="" src="2022-05-10-11-27-23.png" />
-        </a>
-    </p>
-<ol start="5">
-<li>Test</li>
-</ol>
-<pre><code>led = 4
-gpio.mode(led,gpio.OUTPUT,gpio.PULLUP)
-gpio.write(led,gpio.LOW)
-</code></pre><p>
-        <a data-fancybox="gallery" href="2022-05-10-11-29-26.png">
-            <img class="mx-auto" alt="" src="2022-05-10-11-29-26.png" />
-        </a>
-    </p>
-<p>
-        <a data-fancybox="gallery" href="2022-05-10-11-39-18.png">
-            <img class="mx-auto" alt="" src="2022-05-10-11-39-18.png" />
-        </a>
-    </p>
+            <h3 id="使用lua-来搭建httpserver">使用lua 来搭建httpserver</h3>
 
         </div>
 
