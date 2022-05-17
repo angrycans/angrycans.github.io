@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>(3) 搭建httpserver  | 我的杂货铺</title>
-    <meta property="og:title" content="(3) 搭建httpserver  - 我的杂货铺">
+    <title>NodeMCU_littlefs | 我的杂货铺</title>
+    <meta property="og:title" content="NodeMCU_littlefs - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-10T14:27:23&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-17T10:47:48&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-10T14:27:23&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T10:47:48&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="(3) 搭建httpserver ">
+    <meta name="description" content="NodeMCU_littlefs">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/nodemcu_httpserver1/">
+    <meta property="og:url" content="https://angrycans.github.io/post/nodeMCU_littlefs/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -138,9 +138,9 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#使用platformio了解arduino-littlefs">使用PlatformIO了解arduino littleFS</a>
       <ul>
-        <li><a href="#使用lua-来搭建httpserver">使用lua 来搭建httpserver</a></li>
+        <li><a href="#使用--vs-code--platformio-开发">使用  VS Code + PlatformIO 开发</a></li>
       </ul>
     </li>
   </ul>
@@ -180,10 +180,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">(3) 搭建httpserver </h1>
+            <h1 class="post-title">NodeMCU_littlefs</h1>
         </header>
         <date class="post-meta meta-date">
-            2022年5月10日
+            2022年5月17日
         </date>
         
         <div class="post-meta">
@@ -207,16 +207,93 @@
         </div>
         
         <div class="post-content">
-            <h3 id="使用lua-来搭建httpserver">使用lua 来搭建httpserver</h3>
+            <h2 id="使用platformio了解arduino-littlefs">使用PlatformIO了解arduino littleFS</h2>
+<h3 id="使用--vs-code--platformio-开发">使用  VS Code + PlatformIO 开发</h3>
 <ol>
+<li>安装vscode 插件 PlatformIO</li>
+<li>使用PlatformIO 新建一个项目LitteFS
+
+        <a data-fancybox="gallery" href="2022-05-17-10-37-57.png">
+            <img class="mx-auto" alt="" src="2022-05-17-10-37-57.png" />
+        </a>
+    </li>
+<li>修改platformio.ini 为</li>
+</ol>
+<pre><code>[env:nodemcuv2]
+platform = espressif8266
+board = nodemcuv2
+framework = arduino
+board_build.filesystem = littlefs
+</code></pre><ol start="4">
 <li>
-<p>nodemcu的官方mod库
-<a href="https://github.com/nodemcu/nodemcu-firmware/tree/release/lua_modules">https://github.com/nodemcu/nodemcu-firmware/tree/release/lua_modules</a></p>
+<p>熟悉下PlatformIO 面板
+
+        <a data-fancybox="gallery" href="2022-05-17-10-40-10.png">
+            <img class="mx-auto" alt="" src="2022-05-17-10-40-10.png" />
+        </a>
+    </p>
 </li>
 <li>
-<p>开发工具
-<a href="https://github.com/AndiDittrich/NodeMCU-Tool">https://github.com/AndiDittrich/NodeMCU-Tool</a>
-npm install nodemcu-tool -g</p>
+<p>LittleFS 项目新增data文件夹 ,必须使用data名字
+文件下面新增一个test.txt ,内容hello world</p>
+</li>
+<li>
+<p>src/main.cpp 使用下列代码 测试下littlefs</p>
+</li>
+</ol>
+<pre><code>/*********
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com/esp8266-nodemcu-vs-code-platformio-littlefs/
+*********/
+
+#include &lt;Arduino.h&gt;
+#include &quot;LittleFS.h&quot;
+
+void setup()
+{
+  Serial.begin(9600);
+
+  if (!LittleFS.begin())
+  {
+    Serial.println(&quot;An Error has occurred while mounting LittleFS&quot;);
+    return;
+  }
+
+  File file = LittleFS.open(&quot;/test.txt&quot;, &quot;r&quot;);
+  if (!file)
+  {
+    Serial.println(&quot;Failed to open file for reading&quot;);
+    return;
+  }
+
+  Serial.println(&quot;File Content:&quot;);
+  while (file.available())
+  {
+    Serial.write(file.read());
+  }
+  file.close();
+}
+
+void loop()
+{
+}
+
+</code></pre><ol start="7">
+<li>
+<p>使用PlatformIO 面板的下列功能
+
+        <a data-fancybox="gallery" href="2022-05-17-10-44-03.png">
+            <img class="mx-auto" alt="" src="2022-05-17-10-44-03.png" />
+        </a>
+    </p>
+</li>
+<li>
+<p>然后就可以在控制台看到
+
+        <a data-fancybox="gallery" href="2022-05-17-10-44-58.png">
+            <img class="mx-auto" alt="" src="2022-05-17-10-44-58.png" />
+        </a>
+    </p>
 </li>
 </ol>
 

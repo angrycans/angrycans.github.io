@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 17 May 2022 10:47:48 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NodeMCU_littlefs</title>
-      <link>https://angrycans.github.io/post/example-6/nodeMCU_littlefs/</link>
+      <link>https://angrycans.github.io/post/nodeMCU_littlefs/</link>
       <pubDate>Tue, 17 May 2022 10:47:48 +0800</pubDate>
       
-      <guid>https://angrycans.github.io/post/example-6/nodeMCU_littlefs/</guid>
+      <guid>https://angrycans.github.io/post/nodeMCU_littlefs/</guid>
       <description>使用PlatformIO了解arduino littleFS 使用 VS Code + PlatformIO 开发 安装vscode 插件 PlatformIO 使用PlatformIO 新建一个项目LitteFS 修改platformio.ini 为 [env:nodemcuv2] platform = espressif8266 board = nodemcuv2 framework = arduino board_build.filesystem = littlefs 熟悉下PlatformIO 面板 LittleFS 项目新增data文件夹 ,必须使用data名字 文件下面新增</description>
     </item>
     
