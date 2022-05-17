@@ -6,23 +6,32 @@
     <description>Recent content in Posts on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 10 May 2022 14:27:23 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 May 2022 10:47:48 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NodeMCU_littlefs</title>
+      <link>https://angrycans.github.io/post/example-6/nodeMCU_littlefs/</link>
+      <pubDate>Tue, 17 May 2022 10:47:48 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/example-6/nodeMCU_littlefs/</guid>
+      <description>使用PlatformIO了解arduino littleFS 使用 VS Code + PlatformIO 开发 安装vscode 插件 PlatformIO 使用PlatformIO 新建一个项目LitteFS 修改platformio.ini 为 [env:nodemcuv2] platform = espressif8266 board = nodemcuv2 framework = arduino board_build.filesystem = littlefs 熟悉下PlatformIO 面板 LittleFS 项目新增data文件夹 ,必须使用data名字 文件下面新增</description>
+    </item>
+    
     <item>
       <title>(3) 搭建httpserver </title>
       <link>https://angrycans.github.io/post/nodemcu_httpserver1/</link>
       <pubDate>Tue, 10 May 2022 14:27:23 +0800</pubDate>
       
       <guid>https://angrycans.github.io/post/nodemcu_httpserver1/</guid>
-      <description>使用lua 来搭建httpserver nodemcu的官方mod库 https://github.com/nodemcu/nodemcu-firmware/tree/release/lua_modules</description>
+      <description>使用lua 来搭建httpserver nodemcu的官方mod库 https://github.com/nodemcu/nodemcu-firmware/tree/release/lua_modules 开发工具 https://github.com/AndiDittrich/NodeMCU-Tool npm install nodemcu-tool -g</description>
     </item>
     
     <item>
-      <title>(2) NodeMCU FirmwareBurn</title>
+      <title>(2) NodeMCU FirmwareBurn lua固件支持</title>
       <link>https://angrycans.github.io/post/nodeMCU_FirmwareBurn/</link>
       <pubDate>Mon, 09 May 2022 16:11:35 +0800</pubDate>
       
       <guid>https://angrycans.github.io/post/nodeMCU_FirmwareBurn/</guid>
-      <description>固件烧录 固件下载地址 https://nodemcu-build.com/ 烧录工具 https://github.com/marcelstoer/nodemcu-pyflasher 选择需要的模块编译 几分钟后邮箱会收到bin文件,进行烧录 ESPlorer 下载安装 https://github.com/4refr0nt/ESPlorer/releases Test led = 4 gpio.mode(led,gpio.OUTPUT,gpio.PULLUP) gpio.write(led,gpio.LOW)</description>
+      <description>nodemcu lua固件烧录 固件下载地址 https://nodemcu-build.com/ 烧录工具 https://github.com/marcelstoer/nodemcu-pyflasher 选择需要的模块编译 几分钟后邮箱会收到bin文件,进行烧录 ESPlorer 下载安装 https://github.com/4refr0nt/ESPlorer/releases Test led = 4 gpio.mode(led,gpio.OUTPUT,gpio.PULLUP) gpio.write(led,gpio.LOW)</description>
     </item>
     
     <item>
