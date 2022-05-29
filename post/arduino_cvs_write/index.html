@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>(1)NodeMCU环境搭建 MAC | 我的杂货铺</title>
-    <meta property="og:title" content="(1)NodeMCU环境搭建 MAC - 我的杂货铺">
+    <title>Arduino读取cvs格式 | 我的杂货铺</title>
+    <meta property="og:title" content="Arduino读取cvs格式 - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-07T15:37:56&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-29T18:36:22&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T15:37:56&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-29T18:36:22&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="(1)NodeMCU环境搭建 MAC">
+    <meta name="description" content="Arduino读取cvs格式">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/nodeMCU_setting/">
+    <meta property="og:url" content="https://angrycans.github.io/post/arduino_cvs_write/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -140,9 +140,8 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#1-arduino-install">1. arduino install</a></li>
-        <li><a href="#2-esp8266-install">2. ESP8266 install</a></li>
-        <li><a href="#3-test">3. Test</a></li>
+        <li><a href="#工具">工具</a></li>
+        <li><a href="#使用">使用</a></li>
       </ul>
     </li>
   </ul>
@@ -182,18 +181,11 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">(1)NodeMCU环境搭建 MAC</h1>
+            <h1 class="post-title">Arduino读取cvs格式</h1>
         </header>
         <date class="post-meta meta-date">
-            2022年5月7日
+            2022年5月29日
         </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/IOT'>IOT</a></span>
-            
-        </div>
         
         
         <div class="post-meta">
@@ -209,52 +201,148 @@
         </div>
         
         <div class="post-content">
-            <h3 id="1-arduino-install">1. arduino install</h3>
-<p><a href="https://www.arduino.cc/en/software">https://www.arduino.cc/en/software</a></p>
-<h3 id="2-esp8266-install">2. ESP8266 install</h3>
-<ol>
-<li>
-<p>config <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a>
+            <h3 id="工具">工具</h3>
+<pre><code>
+int csvReadText(File *file, char *str, size_t size, char delim)
+{
+  uint8_t ch;
+  int rtn;
+  size_t n = 0;
+  while (true)
+  {
+    // check for EOF
+    if (!file-&gt;available())
+    {
+      rtn = 0;
+      break;
+    }
+    if (file-&gt;read(&amp;ch, 1) != 1)
+    {
+      // read error
+      rtn = -1;
+      break;
+    }
+    // Delete CR.
+    if (ch == '\r')
+    {
+      continue;
+    }
+    if (ch == delim || ch == '\n')
+    {
+      rtn = ch;
+      break;
+    }
+    if ((n + 1) &gt;= size)
+    {
+      // string too long
+      rtn = -2;
+      n--;
+      break;
+    }
+    str[n++] = ch;
+  }
+  str[n] = '\0';
 
-        <a data-fancybox="gallery" href="2022-05-09-14-41-19.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-41-19.png" />
-        </a>
-    </p>
-</li>
-<li>
-<p>install esp8266 开发板
+  Log.traceln(&quot;readText %s&quot;, str);
+  return rtn;
+}
+//------------------------------------------------------------------------------
+int csvReadInt32(File *file, int32_t *num, char delim)
+{
+  char buf[20];
+  char *ptr;
+  int rtn = csvReadText(file, buf, sizeof(buf), delim);
+  if (rtn &lt; 0)
+    return rtn;
+  *num = strtol(buf, &amp;ptr, 10);
+  if (buf == ptr)
+    return -3;
+  while (isspace(*ptr))
+    ptr++;
+  return *ptr == 0 ? rtn : -4;
+}
+//------------------------------------------------------------------------------
+int csvReadInt16(File *file, int16_t *num, char delim)
+{
+  int32_t tmp;
+  int rtn = csvReadInt32(file, &amp;tmp, delim);
+  if (rtn &lt; 0)
+    return rtn;
+  if (tmp &lt; INT_MIN || tmp &gt; INT_MAX)
+    return -5;
+  *num = tmp;
+  return rtn;
+}
+//------------------------------------------------------------------------------
+int csvReadUint32(File *file, uint32_t *num, char delim)
+{
+  char buf[20];
+  char *ptr;
+  int rtn = csvReadText(file, buf, sizeof(buf), delim);
+  if (rtn &lt; 0)
+    return rtn;
+  *num = strtoul(buf, &amp;ptr, 10);
+  if (buf == ptr)
+    return -3;
+  while (isspace(*ptr))
+    ptr++;
+  return *ptr == 0 ? rtn : -4;
+}
+//------------------------------------------------------------------------------
+int csvReadUint16(File *file, uint16_t *num, char delim)
+{
+  uint32_t tmp;
+  int rtn = csvReadUint32(file, &amp;tmp, delim);
+  if (rtn &lt; 0)
+    return rtn;
+  if (tmp &gt; UINT_MAX)
+    return -5;
+  *num = tmp;
+  return rtn;
+}
+//------------------------------------------------------------------------------
+int csvReadDouble(File *file, double *num, char delim)
+{
+  char buf[20];
+  char *ptr;
+  int rtn = csvReadText(file, buf, sizeof(buf), delim);
+  if (rtn &lt; 0)
+    return rtn;
+  *num = strtod(buf, &amp;ptr);
+  if (buf == ptr)
+    return -3;
+  while (isspace(*ptr))
+    ptr++;
+  return *ptr == 0 ? rtn : -4;
+}
+//------------------------------------------------------------------------------
+int csvReadFloat(File *file, float *num, char delim)
+{
+  double tmp;
+  int rtn = csvReadDouble(file, &amp;tmp, delim);
+  if (rtn &lt; 0)
+    return rtn;
+  // could test for too large.
+  *num = tmp;
+  return rtn;
+}
+</code></pre><h3 id="使用">使用</h3>
+<p>read track.txt
+32.11224,118.9098393,trackname</p>
+<pre><code> 
+   File trackfile = SD.open(&quot;track.txt&quot;, FILE_READ);
 
-        <a data-fancybox="gallery" href="2022-05-09-14-55-01.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-55-01.png" />
-        </a>
-    </p>
-</li>
-</ol>
-<p>
-        <a data-fancybox="gallery" href="2022-05-09-14-58-31.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-58-31.png" />
-        </a>
-    </p>
-<h3 id="3-test">3. Test</h3>
-<p>usb 连接好nodemcu
-设置端口
+       while (trackfile.available())
+      {
+         if (csvReadDouble(&amp;trackfile, &amp;TRACK_LAT, ',') != ',' || csvReadDouble(&amp;trackfile, &amp;TRACK_LNG, ',') != ',' || csvReadText(&amp;trackfile, TRACKNAME, sizeof(TRACKNAME), ',') != '\n')
+        {
+           Log.traceln(&quot;track.txt read error&quot;);
+         }
 
-        <a data-fancybox="gallery" href="2022-05-09-15-24-07.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-24-07.png" />
-        </a>
-    </p>
-<p>选择blink
-
-        <a data-fancybox="gallery" href="2022-05-09-15-18-01.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-18-01.png" />
-        </a>
-    </p>
-<p>
-        <a data-fancybox="gallery" href="2022-05-09-15-21-48.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-21-48.png" />
-        </a>
-    </p>
-
+         Log.traceln(&quot;track.txt %D %D %s&quot;, TRACK_LAT, TRACK_LNG, TRACKNAME);
+       }
+      trackfile.close(); 
+</code></pre>
         </div>
 
         
@@ -262,11 +350,7 @@
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/IOT'>IOT</a></li>
-                
-            </ul>
+            没有标签
             
         </div>
     </article>
