@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>Power_onoff</title>
+      <link>https://angrycans.github.io/post/power_onoff/</link>
+      <pubDate>Tue, 17 May 2022 10:47:48 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/power_onoff/</guid>
+      <description>最近在实现一个GPS计时器模块.期间碰到一个最简单的问题.如何实现一个开关机电路. AO3401 +AO3400 mosfet管的实现. power on 高电平 导通 低电平 断开</description>
+    </item>
+    
+    <item>
       <title>(3) 搭建httpserver </title>
       <link>https://angrycans.github.io/post/nodemcu_httpserver1/</link>
       <pubDate>Tue, 10 May 2022 14:27:23 +0800</pubDate>

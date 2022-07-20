@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Arduino读取cvs格式 | 我的杂货铺</title>
-    <meta property="og:title" content="Arduino读取cvs格式 - 我的杂货铺">
+    <title>Power_onoff | 我的杂货铺</title>
+    <meta property="og:title" content="Power_onoff - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-29T18:36:22&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-17T10:47:48&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-29T18:36:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T10:47:48&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="Arduino读取cvs格式">
+    <meta name="description" content="Power_onoff">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/arduino_cvs_write/">
+    <meta property="og:url" content="https://angrycans.github.io/post/power_onoff/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -140,8 +140,7 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#工具">工具</a></li>
-        <li><a href="#使用">使用</a></li>
+        <li><a href="#最近在实现一个gps计时器模块期间碰到一个最简单的问题如何实现一个开关机电路">最近在实现一个GPS计时器模块.期间碰到一个最简单的问题.如何实现一个开关机电路.</a></li>
       </ul>
     </li>
   </ul>
@@ -181,11 +180,18 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Arduino读取cvs格式</h1>
+            <h1 class="post-title">Power_onoff</h1>
         </header>
         <date class="post-meta meta-date">
-            2022年5月29日
+            2022年5月17日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/IOT'>IOT</a></span>
+            
+        </div>
         
         
         <div class="post-meta">
@@ -201,148 +207,15 @@
         </div>
         
         <div class="post-content">
-            <h3 id="工具">工具</h3>
-<pre><code>
-int csvReadText(File *file, char *str, size_t size, char delim)
-{
-  uint8_t ch;
-  int rtn;
-  size_t n = 0;
-  while (true)
-  {
-    // check for EOF
-    if (!file-&gt;available())
-    {
-      rtn = 0;
-      break;
-    }
-    if (file-&gt;read(&amp;ch, 1) != 1)
-    {
-      // read error
-      rtn = -1;
-      break;
-    }
-    // Delete CR.
-    if (ch == '\r')
-    {
-      continue;
-    }
-    if (ch == delim || ch == '\n')
-    {
-      rtn = ch;
-      break;
-    }
-    if ((n + 1) &gt;= size)
-    {
-      // string too long
-      rtn = -2;
-      n--;
-      break;
-    }
-    str[n++] = ch;
-  }
-  str[n] = '\0';
+            <h3 id="最近在实现一个gps计时器模块期间碰到一个最简单的问题如何实现一个开关机电路">最近在实现一个GPS计时器模块.期间碰到一个最简单的问题.如何实现一个开关机电路.</h3>
+<p>AO3401 +AO3400 mosfet管的实现.
 
-  Log.traceln(&quot;readText %s&quot;, str);
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadInt32(File *file, int32_t *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtol(buf, &amp;ptr, 10);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadInt16(File *file, int16_t *num, char delim)
-{
-  int32_t tmp;
-  int rtn = csvReadInt32(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  if (tmp &lt; INT_MIN || tmp &gt; INT_MAX)
-    return -5;
-  *num = tmp;
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadUint32(File *file, uint32_t *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtoul(buf, &amp;ptr, 10);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadUint16(File *file, uint16_t *num, char delim)
-{
-  uint32_t tmp;
-  int rtn = csvReadUint32(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  if (tmp &gt; UINT_MAX)
-    return -5;
-  *num = tmp;
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadDouble(File *file, double *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtod(buf, &amp;ptr);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadFloat(File *file, float *num, char delim)
-{
-  double tmp;
-  int rtn = csvReadDouble(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  // could test for too large.
-  *num = tmp;
-  return rtn;
-}
-</code></pre><h3 id="使用">使用</h3>
-<p>read track.txt
-32.11224,118.9098393,trackname</p>
-<pre><code> 
-   File trackfile = SD.open(&quot;track.txt&quot;, FILE_READ);
+        <a data-fancybox="gallery" href="2022-07-20-15-22-08.png">
+            <img class="mx-auto" alt="" src="2022-07-20-15-22-08.png" />
+        </a>
+    </p>
+<p>power on 高电平 导通 低电平 断开</p>
 
-       while (trackfile.available())
-      {
-         if (csvReadDouble(&amp;trackfile, &amp;TRACK_LAT, ',') != ',' || csvReadDouble(&amp;trackfile, &amp;TRACK_LNG, ',') != ',' || csvReadText(&amp;trackfile, TRACKNAME, sizeof(TRACKNAME), ',') != '\n')
-        {
-           Log.traceln(&quot;track.txt read error&quot;);
-         }
-
-         Log.traceln(&quot;track.txt %D %D %s&quot;, TRACK_LAT, TRACK_LNG, TRACKNAME);
-       }
-      trackfile.close(); 
-</code></pre>
         </div>
 
         
@@ -350,7 +223,11 @@ int csvReadFloat(File *file, float *num, char delim)
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/IOT'>IOT</a></li>
+                
+            </ul>
             
         </div>
     </article>
