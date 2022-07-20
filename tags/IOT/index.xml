@@ -6,7 +6,16 @@
     <description>Recent content in IOT on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 17 May 2022 10:47:48 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/tags/IOT/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 10:47:48 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/tags/IOT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Power_onoff</title>
+      <link>https://angrycans.github.io/post/power_onoff/</link>
+      <pubDate>Wed, 20 Jul 2022 10:47:48 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/power_onoff/</guid>
+      <description>最近在实现一个GPS计时器模块.期间碰到一个最简单的问题.如何实现一个开关机电路. AO3401 +AO3400 mosfet管的实现. power on 高电平 导通 低电平 断开</description>
+    </item>
+    
     <item>
       <title>NodeMCU_littlefs</title>
       <link>https://angrycans.github.io/post/nodeMCU_littlefs/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://angrycans.github.io/post/nodeMCU_littlefs/</guid>
       <description>使用PlatformIO了解arduino littleFS 使用 VS Code + PlatformIO 开发 安装vscode 插件 PlatformIO 使用PlatformIO 新建一个项目LitteFS 修改platformio.ini 为 [env:nodemcuv2] platform = espressif8266 board = nodemcuv2 framework = arduino board_build.filesystem = littlefs 熟悉下PlatformIO 面板 LittleFS 项目新增data文件夹 ,必须使用data名字 文件下面新增</description>
-    </item>
-    
-    <item>
-      <title>Power_onoff</title>
-      <link>https://angrycans.github.io/post/power_onoff/</link>
-      <pubDate>Tue, 17 May 2022 10:47:48 +0800</pubDate>
-      
-      <guid>https://angrycans.github.io/post/power_onoff/</guid>
-      <description>最近在实现一个GPS计时器模块.期间碰到一个最简单的问题.如何实现一个开关机电路. AO3401 +AO3400 mosfet管的实现. power on 高电平 导通 低电平 断开</description>
     </item>
     
     <item>
