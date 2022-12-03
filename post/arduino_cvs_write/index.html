@@ -53,7 +53,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://angrycans.github.io">首页</a>
+                    <a class="current" href="https://angrycans.github.io">Home</a>
                     
                     <a  href="https://angrycans.github.io/archives/" title="归档">归档</a>
                     
@@ -134,7 +134,7 @@
     }
 </style>
 <div class="post-toc" style="position: absolute; top: 188px;">
-    <h2 class="post-toc-title">文章目录</h2>
+    <h2 class="post-toc-title">Table of Contents</h2>
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
@@ -183,26 +183,30 @@
         <header>
             <h1 class="post-title">Arduino读取cvs格式</h1>
         </header>
-        <date class="post-meta meta-date">
-            2022年5月29日
-        </date>
         
+  <time datetime="2022-05-29T10:36:22Z" class="post-meta meta-date dt-published">
+    2022-05-29
+  </time>
+
+
+
         
         <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
+            <span id="busuanzi_container_page_pv">&nbsp;|
+                <span id="busuanzi_value_page_pv"></span> <span>reads</span>
+            </span>
         </div>
         
         
         <div class="clear" style="display: none">
             <div class="toc-article">
-                <div class="toc-title">文章目录</div>
+                <div class="toc-title">Table of Contents</div>
             </div>
         </div>
         
         <div class="post-content">
             <h3 id="工具">工具</h3>
-<pre><code>
+<pre tabindex="0"><code>
 int csvReadText(File *file, char *str, size_t size, char delim)
 {
   uint8_t ch;
@@ -223,11 +227,11 @@ int csvReadText(File *file, char *str, size_t size, char delim)
       break;
     }
     // Delete CR.
-    if (ch == '\r')
+    if (ch == &#39;\r&#39;)
     {
       continue;
     }
-    if (ch == delim || ch == '\n')
+    if (ch == delim || ch == &#39;\n&#39;)
     {
       rtn = ch;
       break;
@@ -241,9 +245,9 @@ int csvReadText(File *file, char *str, size_t size, char delim)
     }
     str[n++] = ch;
   }
-  str[n] = '\0';
+  str[n] = &#39;\0&#39;;
 
-  Log.traceln(&quot;readText %s&quot;, str);
+  Log.traceln(&#34;readText %s&#34;, str);
   return rtn;
 }
 //------------------------------------------------------------------------------
@@ -329,17 +333,17 @@ int csvReadFloat(File *file, float *num, char delim)
 </code></pre><h3 id="使用">使用</h3>
 <p>read track.txt
 32.11224,118.9098393,trackname</p>
-<pre><code> 
-   File trackfile = SD.open(&quot;track.txt&quot;, FILE_READ);
+<pre tabindex="0"><code> 
+   File trackfile = SD.open(&#34;track.txt&#34;, FILE_READ);
 
        while (trackfile.available())
       {
-         if (csvReadDouble(&amp;trackfile, &amp;TRACK_LAT, ',') != ',' || csvReadDouble(&amp;trackfile, &amp;TRACK_LNG, ',') != ',' || csvReadText(&amp;trackfile, TRACKNAME, sizeof(TRACKNAME), ',') != '\n')
+         if (csvReadDouble(&amp;trackfile, &amp;TRACK_LAT, &#39;,&#39;) != &#39;,&#39; || csvReadDouble(&amp;trackfile, &amp;TRACK_LNG, &#39;,&#39;) != &#39;,&#39; || csvReadText(&amp;trackfile, TRACKNAME, sizeof(TRACKNAME), &#39;,&#39;) != &#39;\n&#39;)
         {
-           Log.traceln(&quot;track.txt read error&quot;);
+           Log.traceln(&#34;track.txt read error&#34;);
          }
 
-         Log.traceln(&quot;track.txt %D %D %s&quot;, TRACK_LAT, TRACK_LNG, TRACKNAME);
+         Log.traceln(&#34;track.txt %D %D %s&#34;, TRACK_LAT, TRACK_LNG, TRACKNAME);
        }
       trackfile.close(); 
 </code></pre>
@@ -348,9 +352,10 @@ int csvReadFloat(File *file, float *num, char delim)
         
 
 
+
         <div class="post-meta meta-tags">
             
-            没有标签
+            No tags
             
         </div>
     </article>
@@ -378,40 +383,44 @@ int csvReadFloat(File *file, float *num, char delim)
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://angrycans.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://angrycans.github.io/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="https://angrycans.github.io">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+
     <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
+        <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
     
     <li>
-        <a href="https://angrycans.github.io/post/power_onoff/" title="Power_onoff">Power_onoff</a>
+        <a href="https://angrycans.github.io/post/arduino_fs/" title="Arduino FS 常用方法" target="_blank">Arduino FS 常用方法</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/arduino_cvs_write/" title="Arduino读取cvs格式">Arduino读取cvs格式</a>
+        <a href="https://angrycans.github.io/post/power_onoff/" title="Power_onoff" target="_blank">Power_onoff</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_littlefs/" title="NodeMCU_littlefs">NodeMCU_littlefs</a>
+        <a href="https://angrycans.github.io/post/arduino_cvs_write/" title="Arduino读取cvs格式" target="_blank">Arduino读取cvs格式</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodemcu_httpserver1/" title="(3) 搭建httpserver ">(3) 搭建httpserver </a>
+        <a href="https://angrycans.github.io/post/nodeMCU_littlefs/" title="NodeMCU_littlefs" target="_blank">NodeMCU_littlefs</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/" title="(2) NodeMCU FirmwareBurn lua固件支持">(2) NodeMCU FirmwareBurn lua固件支持</a>
+        <a href="https://angrycans.github.io/post/nodemcu_httpserver1/" title="(3) 搭建httpserver " target="_blank">(3) 搭建httpserver </a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_setting/" title="(1)NodeMCU环境搭建 MAC">(1)NodeMCU环境搭建 MAC</a>
+        <a href="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/" title="(2) NodeMCU FirmwareBurn lua固件支持" target="_blank">(2) NodeMCU FirmwareBurn lua固件支持</a>
+    </li>
+    
+    <li>
+        <a href="https://angrycans.github.io/post/nodeMCU_setting/" title="(1)NodeMCU环境搭建 MAC" target="_blank">(1)NodeMCU环境搭建 MAC</a>
     </li>
     
 </ul>
@@ -420,16 +429,18 @@ int csvReadFloat(File *file, float *num, char delim)
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories/'>Categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://angrycans.github.io/categories/IOT/">IOT (5)</a></li>
     
+    <li><a href="https://angrycans.github.io/categories/arduino/">arduino (1)</a></li>
+    
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+        <h3 class="widget-title"><a href='/tags/'>Tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://angrycans.github.io/tags/IOT/">IOT</a>
@@ -440,9 +451,9 @@ int csvReadFloat(File *file, float *num, char delim)
     
 
     <section class="widget">
-        <h3 class="widget-title">其它</h3>
+        <h3 class="widget-title">Meta</h3>
         <ul class="widget-list">
-            <li><a href="https://angrycans.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="https://angrycans.github.io/index.xml">RSS</a></li>
         </ul>
     </section>
 </div>

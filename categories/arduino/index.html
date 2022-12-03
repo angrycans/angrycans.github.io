@@ -9,20 +9,21 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>归档 | 我的杂货铺</title>
-    <meta property="og:title" content="归档 - 我的杂货铺">
+    <title>arduino | 我的杂货铺</title>
+    <meta property="og:title" content="arduino - 我的杂货铺">
     <meta property="og:type" content="article">
         
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="归档">
+    <meta name="description" content="arduino">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/archives/">
+    <meta property="og:url" content="https://angrycans.github.io/categories/arduino/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://angrycans.github.io/categories/arduino/index.xml" title="我的杂货铺" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -51,7 +52,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="" href="https://angrycans.github.io">Home</a>
                     
-                    <a class="current" href="https://angrycans.github.io/archives/" title="归档">归档</a>
+                    <a  href="https://angrycans.github.io/archives/" title="归档">归档</a>
                     
                     <a  href="https://angrycans.github.io/about/" title="关于">关于</a>
                     
@@ -67,48 +68,52 @@
 
                 <div class="col-8" id="main">
                     
-<div class="post-archive">
+<div class="res-cons">
     
-    <h2>2022</h2>
-    <ul class="listing">
+    <h3 class="archive-title">
         
-        <li>
-            <span class="date">2022/12/03</span>
-            <a href="https://angrycans.github.io/post/arduino_fs/" title="Arduino FS 常用方法" target="_blank">Arduino FS 常用方法</a>
-        </li>
+            <span>5</span>
         
-        <li>
-            <span class="date">2022/07/20</span>
-            <a href="https://angrycans.github.io/post/power_onoff/" title="Power_onoff" target="_blank">Power_onoff</a>
-        </li>
+            <span>1</span>
         
-        <li>
-            <span class="date">2022/05/29</span>
-            <a href="https://angrycans.github.io/post/arduino_cvs_write/" title="Arduino读取cvs格式" target="_blank">Arduino读取cvs格式</a>
-        </li>
-        
-        <li>
-            <span class="date">2022/05/17</span>
-            <a href="https://angrycans.github.io/post/nodeMCU_littlefs/" title="NodeMCU_littlefs" target="_blank">NodeMCU_littlefs</a>
-        </li>
-        
-        <li>
-            <span class="date">2022/05/10</span>
-            <a href="https://angrycans.github.io/post/nodemcu_httpserver1/" title="(3) 搭建httpserver " target="_blank">(3) 搭建httpserver </a>
-        </li>
-        
-        <li>
-            <span class="date">2022/05/09</span>
-            <a href="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/" title="(2) NodeMCU FirmwareBurn lua固件支持" target="_blank">(2) NodeMCU FirmwareBurn lua固件支持</a>
-        </li>
-        
-        <li>
-            <span class="date">2022/05/07</span>
-            <a href="https://angrycans.github.io/post/nodeMCU_setting/" title="(1)NodeMCU环境搭建 MAC" target="_blank">(1)NodeMCU环境搭建 MAC</a>
-        </li>
-        
-    </ul>
+        <span class="keyword">arduino</span>
+        articles
+    </h3>
     
+
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://angrycans.github.io/post/arduino_fs/" target="_blank">Arduino FS 常用方法</a>
+            </h1>
+        </header>
+        
+  <time datetime="2022-12-03T06:48:15Z" class="post-meta meta-date dt-published">
+    2022-12-03
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/categories/arduino' target="_blank">arduino</a>
+  
+</div>
+
+
+        <div class="post-content">
+            Arduino fs 常用方法 https://github.com/espressif/arduino-esp32/blob/master/libraries/LittleFS/examples/LITTLEFS_test/LITTLEFS_test.ino 包括了 createDir removeDir listDir readfile writefile appendFile deleteFile rename #include &lt;Arduino.h&gt; #include &#34;FS.h&#34; #include &lt;LittleFS.h&gt; /* You only need to format LittleFS the first time you run a test or else use the LITTLEFS plugin to create a partition https://github.com/lorol/arduino-esp32littlefs-plugin If you test two partitions, you need to use a custom partition.csv file, see in the sketch folder */ //#define TWOPART #define FORMAT_LITTLEFS_IF_FAILED true void listDir(fs::FS &amp;fs, const char * dirname, uint8_t levels){ Serial.printf(&#34;Listing directory: %s\r\n&#34;, dirname); File root = fs.open(dirname); if(!root){ Serial.println(&#34;- failed to open directory&#34;); return; } if(!root.isDirectory()){ Serial.println(&#34; - not a directory&#34;); return; } File file = root.openNextFile(); while(file){ if(file.isDirectory()){ Serial.print(&#34; DIR : &#34;); Serial.println(file.name()); if(levels){ listDir(fs, file.path(), levels -1); } } else { Serial.print(&#34; FILE: &#34;); Serial.print(file.name()); Serial.print(&#34;\tSIZE: &#34;); Serial.println(file.size()); } file = root.openNextFile(); } } void……
+            <p class="readmore"><a href="https://angrycans.github.io/post/arduino_fs/" target="_blank">Continue reading</a></p>
+        </div>
+    </article>
+    
+
+    
+
+
+
+
 
 </div>
 

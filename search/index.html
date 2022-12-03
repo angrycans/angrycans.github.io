@@ -49,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://angrycans.github.io">首页</a>
+                    <a class="" href="https://angrycans.github.io">Home</a>
                     
                     <a  href="https://angrycans.github.io/archives/" title="归档">归档</a>
                     
@@ -66,26 +66,23 @@
             <div class="col-group">
 
                 <div class="col-8" id="main">
-                    
-<div class="res-cons">
+                    <div class="res-cons">
     <h3 class="archive-title">
-        搜索
-        <span class="keyword">哈哈</span>
-        的结果
+        Search: 
+        <span class="keyword">Keyword</span>
+        results
     </h3>
 
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="链接">标题</a>
+                <a href="链接" target="_blank">标题</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2019年12月01日
-        </date>
+        
         <div class="post-content">
             概要……
-            <p class="readmore"><a href="链接">阅读全文</a></p>
+            <p class="readmore"><a href="链接" target="_blank">Continue reading</a></p>
         </div>
     </article>
 
@@ -93,7 +90,7 @@
 
 <script type="text/javascript">
 
-    var getUrlParameter = function getUrlParameter(sParam) {
+    var getUrlParameter = function getUrlParameter (sParam) {
         var sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
@@ -121,10 +118,10 @@
                     var title = item.find("title").text();
                     if (title.toLowerCase().indexOf(q.toLowerCase()) >= 0) {
                         var url = item.find("link").text();
-                        var searchItem = `<article class="post"><header><h1 class="post-title"><a href="` + url + `">` + title + `</a></h1></header>`;
+                        var searchItem = `<article class="post"><header><h1 class="post-title"><a href="` + url + `" target="_blank">` + title + `</a></h1></header>`;
                         var pubDate = new Date(item.find("pubDate").text())
-                        searchItem += `<date class="post-meta meta-date">` + pubDate.getFullYear() + `年` + (pubDate.getMonth() + 1) + `月` + pubDate.getDate() + `日</date>`;
-                        searchItem += `<div class="post-content">` + item.find("description").text() + `……<p class="readmore"><a href="` + url + `">阅读全文</a></p></div></article>`;
+                        searchItem += `<time class="post-meta meta-date">` + pubDate.getFullYear() + `-` + (pubDate.getMonth() + 1) + `-` + pubDate.getDate() + `</time>`;
+                        searchItem += `<div class="post-content">` + item.find("description").text() + `……<p class="readmore"><a href="` + url + `" target="_blank">"Continue reading"</a></p></div></article>`;
 
                         $("div.res-cons").append(searchItem);
                     }
@@ -138,40 +135,44 @@
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://angrycans.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://angrycans.github.io/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="https://angrycans.github.io">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+
     <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
+        <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
     
     <li>
-        <a href="https://angrycans.github.io/post/power_onoff/" title="Power_onoff">Power_onoff</a>
+        <a href="https://angrycans.github.io/post/arduino_fs/" title="Arduino FS 常用方法" target="_blank">Arduino FS 常用方法</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/arduino_cvs_write/" title="Arduino读取cvs格式">Arduino读取cvs格式</a>
+        <a href="https://angrycans.github.io/post/power_onoff/" title="Power_onoff" target="_blank">Power_onoff</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_littlefs/" title="NodeMCU_littlefs">NodeMCU_littlefs</a>
+        <a href="https://angrycans.github.io/post/arduino_cvs_write/" title="Arduino读取cvs格式" target="_blank">Arduino读取cvs格式</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodemcu_httpserver1/" title="(3) 搭建httpserver ">(3) 搭建httpserver </a>
+        <a href="https://angrycans.github.io/post/nodeMCU_littlefs/" title="NodeMCU_littlefs" target="_blank">NodeMCU_littlefs</a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/" title="(2) NodeMCU FirmwareBurn lua固件支持">(2) NodeMCU FirmwareBurn lua固件支持</a>
+        <a href="https://angrycans.github.io/post/nodemcu_httpserver1/" title="(3) 搭建httpserver " target="_blank">(3) 搭建httpserver </a>
     </li>
     
     <li>
-        <a href="https://angrycans.github.io/post/nodeMCU_setting/" title="(1)NodeMCU环境搭建 MAC">(1)NodeMCU环境搭建 MAC</a>
+        <a href="https://angrycans.github.io/post/nodeMCU_FirmwareBurn/" title="(2) NodeMCU FirmwareBurn lua固件支持" target="_blank">(2) NodeMCU FirmwareBurn lua固件支持</a>
+    </li>
+    
+    <li>
+        <a href="https://angrycans.github.io/post/nodeMCU_setting/" title="(1)NodeMCU环境搭建 MAC" target="_blank">(1)NodeMCU环境搭建 MAC</a>
     </li>
     
 </ul>
@@ -180,16 +181,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories/'>Categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://angrycans.github.io/categories/IOT/">IOT (5)</a></li>
     
+    <li><a href="https://angrycans.github.io/categories/arduino/">arduino (1)</a></li>
+    
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+        <h3 class="widget-title"><a href='/tags/'>Tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://angrycans.github.io/tags/IOT/">IOT</a>
@@ -200,9 +203,9 @@
     
 
     <section class="widget">
-        <h3 class="widget-title">其它</h3>
+        <h3 class="widget-title">Meta</h3>
         <ul class="widget-list">
-            <li><a href="https://angrycans.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="https://angrycans.github.io/index.xml">RSS</a></li>
         </ul>
     </section>
 </div>

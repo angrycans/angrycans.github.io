@@ -6,7 +6,16 @@
     <description>Recent content on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 20 Jul 2022 10:47:48 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Dec 2022 14:48:15 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arduino FS 常用方法</title>
+      <link>https://angrycans.github.io/post/arduino_fs/</link>
+      <pubDate>Sat, 03 Dec 2022 14:48:15 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/arduino_fs/</guid>
+      <description>Arduino fs 常用方法 https://github.com/espressif/arduino-esp32/blob/master/libraries/LittleFS/examples/LITTLEFS_test/LITTLEFS_test.ino 包括了 createDir removeDir listDir readfile writefile appendFile deleteFile rename #include &amp;lt;Arduino.h&amp;gt; #include &amp;#34;FS.h&amp;#34; #include &amp;lt;LittleFS.h&amp;gt; /* You only need to format LittleFS the first time you run a test or else use the LITTLEFS plugin to create a partition https://github.com/lorol/arduino-esp32littlefs-plugin If you test two partitions, you need to use a custom partition.csv file, see in the sketch folder */ //#define TWOPART #define FORMAT_LITTLEFS_IF_FAILED true void listDir(fs::FS &amp;amp;fs, const char * dirname, uint8_t levels){ Serial.printf(&amp;#34;Listing directory: %s\r\n&amp;#34;, dirname); File root = fs.open(dirname); if(!root){ Serial.println(&amp;#34;- failed to open directory&amp;#34;); return; } if(!root.isDirectory()){ Serial.println(&amp;#34; - not a directory&amp;#34;); return; } File file = root.openNextFile(); while(file){ if(file.isDirectory()){ Serial.print(&amp;#34; DIR : &amp;#34;); Serial.println(file.name()); if(levels){ listDir(fs, file.path(), levels -1); } } else { Serial.print(&amp;#34; FILE: &amp;#34;); Serial.print(file.name()); Serial.print(&amp;#34;\tSIZE: &amp;#34;); Serial.println(file.size()); } file = root.openNextFile(); } } void</description>
+    </item>
+    
     <item>
       <title>Power_onoff</title>
       <link>https://angrycans.github.io/post/power_onoff/</link>
@@ -22,7 +31,7 @@
       <pubDate>Sun, 29 May 2022 18:36:22 +0800</pubDate>
       
       <guid>https://angrycans.github.io/post/arduino_cvs_write/</guid>
-      <description>工具 int csvReadText(File *file, char *str, size_t size, char delim) { uint8_t ch; int rtn; size_t n = 0; while (true) { // check for EOF if (!file-&amp;gt;available()) { rtn = 0; break; } if (file-&amp;gt;read(&amp;amp;ch, 1) != 1) { // read error rtn = -1; break; } // Delete CR. if (ch == &#39;\r&#39;) { continue; } if (ch == delim || ch == &#39;\n&#39;) { rtn = ch; break; } if ((n + 1) &amp;gt;= size) { // string too long rtn = -2; n--; break; } str[n++] = ch; } str[n] = &#39;\0&#39;; Log.traceln(&amp;quot;readText %s&amp;quot;, str); return rtn; } //------------------------------------------------------------------------------ int csvReadInt32(File *file, int32_t *num, char delim) { char buf[20]; char *ptr; int rtn = csvReadText(file, buf, sizeof(buf), delim); if (rtn &amp;lt; 0) return rtn; *num = strtol(buf, &amp;amp;ptr, 10); if (buf == ptr) return -3;</description>
+      <description>工具 int csvReadText(File *file, char *str, size_t size, char delim) { uint8_t ch; int rtn; size_t n = 0; while (true) { // check for EOF if (!file-&amp;gt;available()) { rtn = 0; break; } if (file-&amp;gt;read(&amp;amp;ch, 1) != 1) { // read error rtn = -1; break; } // Delete CR. if (ch == &amp;#39;\r&amp;#39;) { continue; } if (ch == delim || ch == &amp;#39;\n&amp;#39;) { rtn = ch; break; } if ((n + 1) &amp;gt;= size) { // string too long rtn = -2; n--; break; } str[n++] = ch; } str[n] = &amp;#39;\0&amp;#39;; Log.traceln(&amp;#34;readText %s&amp;#34;, str); return rtn; } //------------------------------------------------------------------------------ int csvReadInt32(File *file, int32_t *num, char delim) { char buf[20]; char *ptr; int rtn = csvReadText(file, buf, sizeof(buf), delim); if (rtn &amp;lt; 0) return rtn; *num = strtol(buf, &amp;amp;ptr, 10); if (buf == ptr) return -3;</description>
     </item>
     
     <item>
