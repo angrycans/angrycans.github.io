@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>(1)NodeMCU环境搭建 MAC | 我的杂货铺</title>
-    <meta property="og:title" content="(1)NodeMCU环境搭建 MAC - 我的杂货铺">
+    <title>Arduino datetime 常用方法 | 我的杂货铺</title>
+    <meta property="og:title" content="Arduino datetime 常用方法 - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-07T15:37:56&#43;08:00'>
+    <meta property="article:published_time" content='2022-12-04T22:32:02&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T15:37:56&#43;08:00'>
+    <meta property="article:modified_time" content='2022-12-04T22:32:02&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="(1)NodeMCU环境搭建 MAC">
+    <meta name="description" content="Arduino datetime 常用方法">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/nodeMCU_setting/">
+    <meta property="og:url" content="https://angrycans.github.io/post/arduino_datetime/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -136,17 +136,7 @@
 <div class="post-toc" style="position: absolute; top: 188px;">
     <h2 class="post-toc-title">Table of Contents</h2>
     <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#1-arduino-install">1. arduino install</a></li>
-        <li><a href="#2-esp8266-install">2. ESP8266 install</a></li>
-        <li><a href="#3-test">3. Test</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+        <nav id="TableOfContents"></nav>
     </div>
 </div>
 <script type="text/javascript">
@@ -182,18 +172,18 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">(1)NodeMCU环境搭建 MAC</h1>
+            <h1 class="post-title">Arduino datetime 常用方法</h1>
         </header>
         
-  <time datetime="2022-05-07T07:37:56Z" class="post-meta meta-date dt-published">
-    2022-05-07
+  <time datetime="2022-12-04T14:32:02Z" class="post-meta meta-date dt-published">
+    2022-12-04
   </time>
 
 
 <div class="post-meta meta-category">
   <span>&nbsp;|</span>
   
-    <a href='/categories/IOT' target="_blank">IOT</a>
+    <a href='/categories/arduino' target="_blank">arduino</a>
   
 </div>
 
@@ -213,52 +203,34 @@
         </div>
         
         <div class="post-content">
-            <h3 id="1-arduino-install">1. arduino install</h3>
-<p><a href="https://www.arduino.cc/en/software">https://www.arduino.cc/en/software</a></p>
-<h3 id="2-esp8266-install">2. ESP8266 install</h3>
-<ol>
-<li>
-<p>config <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a>
+            <p><a href="https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/DateTime.h">https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/DateTime.h</a>
+<a href="https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/BLEFileSharing.h">https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/BLEFileSharing.h</a>
+<a href="https://github.com/PaulStoffregen/Time">https://github.com/PaulStoffregen/Time</a></p>
+<pre tabindex="0"><code>DateTime UTCTime   = DateTime(BLERemoteTime.year, BLERemoteTime.month, BLERemoteTime.day, BLERemoteTime.hour, BLERemoteTime.minutes, BLERemoteTime.seconds);
+  DateTime LocalTime = UTCTime.unixtime() + BLERemoteTime.tz * 3600;
 
-        <a data-fancybox="gallery" href="2022-05-09-14-41-19.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-41-19.png" />
-        </a>
-    </p>
-</li>
-<li>
-<p>install esp8266 开发板
+  dumpTime(&#34;UTC:&#34;, UTCTime);
+  dumpTime(&#34;Local:&#34;, LocalTime);
 
-        <a data-fancybox="gallery" href="2022-05-09-14-55-01.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-55-01.png" />
-        </a>
-    </p>
-</li>
-</ol>
-<p>
-        <a data-fancybox="gallery" href="2022-05-09-14-58-31.png">
-            <img class="mx-auto" alt="" src="2022-05-09-14-58-31.png" />
-        </a>
-    </p>
-<h3 id="3-test">3. Test</h3>
-<p>usb 连接好nodemcu
-设置端口
+  setTime( LocalTime.unixtime() );
 
-        <a data-fancybox="gallery" href="2022-05-09-15-24-07.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-24-07.png" />
-        </a>
-    </p>
-<p>选择blink
+  timeval epoch = {(time_t)LocalTime.unixtime(), 0};
+  const timeval *tv = &amp;epoch;
+  settimeofday(tv, NULL);
 
-        <a data-fancybox="gallery" href="2022-05-09-15-18-01.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-18-01.png" />
-        </a>
-    </p>
-<p>
-        <a data-fancybox="gallery" href="2022-05-09-15-21-48.png">
-            <img class="mx-auto" alt="" src="2022-05-09-15-21-48.png" />
-        </a>
-    </p>
+  struct tm now;
+  getLocalTime(&amp;now,0);
 
+  Serial.printf(&#34;[Heap: %06d] Time has been set to: %04d-%02d-%02d %02d:%02d:%02d\n&#34;,
+   freeheap,
+   LocalTime.year(),
+   LocalTime.month(),
+   LocalTime.day(),
+   LocalTime.hour(),
+   LocalTime.minute(),
+   LocalTime.second()
+  );
+</code></pre>
         </div>
 
         
@@ -267,11 +239,7 @@
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/IOT' target="_blank">IOT</a></li>
-                
-            </ul>
+            No tags
             
         </div>
     </article>

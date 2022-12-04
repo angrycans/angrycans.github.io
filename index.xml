@@ -6,7 +6,16 @@
     <description>Recent content on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 03 Dec 2022 14:48:15 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 22:32:02 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arduino datetime 常用方法</title>
+      <link>https://angrycans.github.io/post/arduino_datetime/</link>
+      <pubDate>Sun, 04 Dec 2022 22:32:02 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/arduino_datetime/</guid>
+      <description>https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/DateTime.h https://github.com/tobozo/ESP32-BLECollector/blob/master/ESP32-BLECollector/BLEFileSharing.h https://github.com/PaulStoffregen/Time DateTime UTCTime = DateTime(BLERemoteTime.year, BLERemoteTime.month, BLERemoteTime.day, BLERemoteTime.hour, BLERemoteTime.minutes, BLERemoteTime.seconds); DateTime LocalTime = UTCTime.unixtime() + BLERemoteTime.tz * 3600; dumpTime(&amp;#34;UTC:&amp;#34;, UTCTime); dumpTime(&amp;#34;Local:&amp;#34;, LocalTime); setTime( LocalTime.unixtime() ); timeval epoch = {(time_t)LocalTime.unixtime(), 0}; const timeval *tv = &amp;amp;epoch; settimeofday(tv, NULL); struct tm now; getLocalTime(&amp;amp;now,0); Serial.printf(&amp;#34;[Heap: %06d] Time has been set to: %04d-%02d-%02d %02d:%02d:%02d\n&amp;#34;, freeheap, LocalTime.year(), LocalTime.month(), LocalTime.day(), LocalTime.hour(), LocalTime.minute(), LocalTime.second() );</description>
+    </item>
+    
     <item>
       <title>Arduino FS 常用方法</title>
       <link>https://angrycans.github.io/post/arduino_fs/</link>
