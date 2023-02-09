@@ -6,7 +6,16 @@
     <description>Recent content on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 04 Dec 2022 22:32:02 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Feb 2023 14:51:03 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AiThinker esp-s3-32s S3OFN8 引脚注意点</title>
+      <link>https://angrycans.github.io/post/esp32_pin/</link>
+      <pubDate>Thu, 09 Feb 2023 14:51:03 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/esp32_pin/</guid>
+      <description>AiThinker esp32 S3OFN8 引脚注意点 AiThinker esp-s3-32s 使用的是 esp32-s3 芯片 我购买的丝印是S3OFN8 安信可 https://docs.ai-thinker.com/_media/esp32/docs/esp-s3-32s_v1.0.0.pdf esp32-s3 乐鑫 https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_cn.pdf 其中 被占用的引脚 esp32 s3 默认的硬件spi pin和i2c pin 软件SPI 一般使用 I2C 一般使用 esp32-s3 技术手册 https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_cn.pdf</description>
+    </item>
+    
     <item>
       <title>Arduino datetime 常用方法</title>
       <link>https://angrycans.github.io/post/arduino_datetime/</link>

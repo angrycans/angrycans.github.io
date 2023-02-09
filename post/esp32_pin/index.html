@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Arduino读取cvs格式 | 我的杂货铺</title>
-    <meta property="og:title" content="Arduino读取cvs格式 - 我的杂货铺">
+    <title>AiThinker esp-s3-32s S3OFN8 引脚注意点 | 我的杂货铺</title>
+    <meta property="og:title" content="AiThinker esp-s3-32s S3OFN8 引脚注意点 - 我的杂货铺">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-05-29T18:36:22&#43;08:00'>
+    <meta property="article:published_time" content='2023-02-09T14:51:03&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-29T18:36:22&#43;08:00'>
+    <meta property="article:modified_time" content='2023-02-09T14:51:03&#43;08:00'>
         
     <meta name="Keywords" content="IOT">
-    <meta name="description" content="Arduino读取cvs格式">
+    <meta name="description" content="AiThinker esp-s3-32s S3OFN8 引脚注意点">
         
     <meta name="author" content="angrycans">
-    <meta property="og:url" content="https://angrycans.github.io/post/arduino_cvs_write/">
+    <meta property="og:url" content="https://angrycans.github.io/post/esp32_pin/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -140,8 +140,7 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#工具">工具</a></li>
-        <li><a href="#使用">使用</a></li>
+        <li><a href="#aithinker-esp32-s3ofn8-引脚注意点">AiThinker esp32 S3OFN8 引脚注意点</a></li>
       </ul>
     </li>
   </ul>
@@ -181,11 +180,11 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Arduino读取cvs格式</h1>
+            <h1 class="post-title">AiThinker esp-s3-32s S3OFN8 引脚注意点</h1>
         </header>
         
-  <time datetime="2022-05-29T10:36:22Z" class="post-meta meta-date dt-published">
-    2022-05-29
+  <time datetime="2023-02-09T06:51:03Z" class="post-meta meta-date dt-published">
+    2023-02-09
   </time>
 
 
@@ -205,148 +204,51 @@
         </div>
         
         <div class="post-content">
-            <h3 id="工具">工具</h3>
-<pre tabindex="0"><code>
-int csvReadText(File *file, char *str, size_t size, char delim)
-{
-  uint8_t ch;
-  int rtn;
-  size_t n = 0;
-  while (true)
-  {
-    // check for EOF
-    if (!file-&gt;available())
-    {
-      rtn = 0;
-      break;
-    }
-    if (file-&gt;read(&amp;ch, 1) != 1)
-    {
-      // read error
-      rtn = -1;
-      break;
-    }
-    // Delete CR.
-    if (ch == &#39;\r&#39;)
-    {
-      continue;
-    }
-    if (ch == delim || ch == &#39;\n&#39;)
-    {
-      rtn = ch;
-      break;
-    }
-    if ((n + 1) &gt;= size)
-    {
-      // string too long
-      rtn = -2;
-      n--;
-      break;
-    }
-    str[n++] = ch;
-  }
-  str[n] = &#39;\0&#39;;
+            <h3 id="aithinker-esp32-s3ofn8-引脚注意点">AiThinker esp32 S3OFN8 引脚注意点</h3>
+<p>AiThinker esp-s3-32s 使用的是 esp32-s3 芯片
 
-  Log.traceln(&#34;readText %s&#34;, str);
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadInt32(File *file, int32_t *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtol(buf, &amp;ptr, 10);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadInt16(File *file, int16_t *num, char delim)
-{
-  int32_t tmp;
-  int rtn = csvReadInt32(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  if (tmp &lt; INT_MIN || tmp &gt; INT_MAX)
-    return -5;
-  *num = tmp;
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadUint32(File *file, uint32_t *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtoul(buf, &amp;ptr, 10);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadUint16(File *file, uint16_t *num, char delim)
-{
-  uint32_t tmp;
-  int rtn = csvReadUint32(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  if (tmp &gt; UINT_MAX)
-    return -5;
-  *num = tmp;
-  return rtn;
-}
-//------------------------------------------------------------------------------
-int csvReadDouble(File *file, double *num, char delim)
-{
-  char buf[20];
-  char *ptr;
-  int rtn = csvReadText(file, buf, sizeof(buf), delim);
-  if (rtn &lt; 0)
-    return rtn;
-  *num = strtod(buf, &amp;ptr);
-  if (buf == ptr)
-    return -3;
-  while (isspace(*ptr))
-    ptr++;
-  return *ptr == 0 ? rtn : -4;
-}
-//------------------------------------------------------------------------------
-int csvReadFloat(File *file, float *num, char delim)
-{
-  double tmp;
-  int rtn = csvReadDouble(file, &amp;tmp, delim);
-  if (rtn &lt; 0)
-    return rtn;
-  // could test for too large.
-  *num = tmp;
-  return rtn;
-}
-</code></pre><h3 id="使用">使用</h3>
-<p>read track.txt
-32.11224,118.9098393,trackname</p>
-<pre tabindex="0"><code> 
-   File trackfile = SD.open(&#34;track.txt&#34;, FILE_READ);
+        <a data-fancybox="gallery" href="372d7bf404c04fac557c0e363606e9a6b2abdb77c112be42f08424bc4dea06a7.png">
+            <img class="mx-auto" alt="picture 1" src="372d7bf404c04fac557c0e363606e9a6b2abdb77c112be42f08424bc4dea06a7.png" />
+        </a>
+    </p>
+<p>我购买的丝印是S3OFN8 安信可
+<a href="https://docs.ai-thinker.com/_media/esp32/docs/esp-s3-32s_v1.0.0.pdf">https://docs.ai-thinker.com/_media/esp32/docs/esp-s3-32s_v1.0.0.pdf</a></p>
+<p>esp32-s3 乐鑫
+<a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_cn.pdf">https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_cn.pdf</a></p>
+<p>其中 被占用的引脚
 
-       while (trackfile.available())
-      {
-         if (csvReadDouble(&amp;trackfile, &amp;TRACK_LAT, &#39;,&#39;) != &#39;,&#39; || csvReadDouble(&amp;trackfile, &amp;TRACK_LNG, &#39;,&#39;) != &#39;,&#39; || csvReadText(&amp;trackfile, TRACKNAME, sizeof(TRACKNAME), &#39;,&#39;) != &#39;\n&#39;)
-        {
-           Log.traceln(&#34;track.txt read error&#34;);
-         }
+        <a data-fancybox="gallery" href="22cc3843d94e6527f1e8c71136f2832c0e5bf6f877a90fdf3988506b2120cb98.png">
+            <img class="mx-auto" alt="picture 2" src="22cc3843d94e6527f1e8c71136f2832c0e5bf6f877a90fdf3988506b2120cb98.png" />
+        </a>
+    </p>
+<p>esp32 s3 默认的硬件spi pin和i2c pin
+软件SPI
+一般使用
 
-         Log.traceln(&#34;track.txt %D %D %s&#34;, TRACK_LAT, TRACK_LNG, TRACKNAME);
-       }
-      trackfile.close(); 
-</code></pre>
+        <a data-fancybox="gallery" href="5fee16b4e73b7be7c057444b6d0b1df11689eca6a38babf07da8e81a13cddfe4.png">
+            <img class="mx-auto" alt="picture 4" src="5fee16b4e73b7be7c057444b6d0b1df11689eca6a38babf07da8e81a13cddfe4.png" />
+        </a>
+    </p>
+<p>
+        <a data-fancybox="gallery" href="36e979a9cd7665f4d7e4fa90e03f4b9d916090d9e1c6c66023858beb597d8f5f.png">
+            <img class="mx-auto" alt="picture 5" src="36e979a9cd7665f4d7e4fa90e03f4b9d916090d9e1c6c66023858beb597d8f5f.png" />
+        </a>
+    </p>
+<p>I2C
+一般使用</p>
+<p>
+        <a data-fancybox="gallery" href="8c707c05faeed646d0b7620c0fef732ddbda615e92a43453180907e8add25bfe.png">
+            <img class="mx-auto" alt="picture 3" src="8c707c05faeed646d0b7620c0fef732ddbda615e92a43453180907e8add25bfe.png" />
+        </a>
+    </p>
+<p>
+        <a data-fancybox="gallery" href="f592af6843f4838ee595d66ecc79962d68e4409cd47cab033e7c2f956f1d4765.png">
+            <img class="mx-auto" alt="picture 6" src="f592af6843f4838ee595d66ecc79962d68e4409cd47cab033e7c2f956f1d4765.png" />
+        </a>
+    </p>
+<p>esp32-s3 技术手册
+<a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_cn.pdf">https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_cn.pdf</a></p>
+
         </div>
 
         
