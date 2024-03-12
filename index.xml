@@ -6,7 +6,34 @@
     <description>Recent content on 我的杂货铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 09 Feb 2023 14:51:03 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Mar 2024 17:35:53 +0800</lastBuildDate><atom:link href="https://angrycans.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>向量的叉乘</title>
+      <link>https://angrycans.github.io/post/vector_crossp/</link>
+      <pubDate>Tue, 12 Mar 2024 17:35:53 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/vector_crossp/</guid>
+      <description>向量的叉乘 向量的叉乘（cross product），不支持交换律，支持结合律，即求同时垂直两个向量的向量，即 c 垂直于 a，同时 c 垂直于 b（a 与 c 的夹角为 90°，b 与 c 的夹角为 90°） 公式 |c|=|a×b|=|a||b|sinα （α 为 a，b 向量之间的夹角） |c| = a,b 向量构成的平行四边形的面</description>
+    </item>
+    
+    <item>
+      <title>向量的点乘</title>
+      <link>https://angrycans.github.io/post/vector_dotp/</link>
+      <pubDate>Tue, 12 Mar 2024 17:32:33 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/vector_dotp/</guid>
+      <description>向量的点乘（点积，内积），满足交换律 几何意义 代数和几何推导过程 点乘又等于 B 在 A 上面的投影乘|A| 即：A·B=a|A| 为什么有时候我们直接说点乘就是B到A的投影了 因为我们会把A进行归一化， |A|.normalize 那么|A|=1 这时候cos(θ)=a</description>
+    </item>
+    
+    <item>
+      <title>向量的加法和减法</title>
+      <link>https://angrycans.github.io/post/vector_add_sub/</link>
+      <pubDate>Tue, 12 Mar 2024 17:28:01 +0800</pubDate>
+      
+      <guid>https://angrycans.github.io/post/vector_add_sub/</guid>
+      <description>向量的加法 v1+v2 满足交换律和结合律 三角形法则 首尾相连，起点指向终点 平行四边形法则 起点相同，对角线为和 多个向量相加时，满足首尾相加 向量的减法 向量的减法 共起点，尾尾相连，其箭头指向被减向量(前面的向量) 减法运算的几何意义</description>
+    </item>
+    
     <item>
       <title>AiThinker esp-s3-32s S3OFN8 引脚注意点</title>
       <link>https://angrycans.github.io/post/esp32_pin/</link>
